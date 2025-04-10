@@ -1,0 +1,6 @@
+CUSTOMER_BUTTON = ("xpath", "//span[normalize-space()='Customer']")
+DRD_LOGIN_BUTTON = ("xpath", "//small[text()='Login']")
+USERNAME_FIELD = ("xpath", "//input[@id='email']")
+PASSWORD_FIELD = ("xpath", "//input[@id='password']")
+REMEMBER_ME_CHECKBOX = ("xpath", "//input[@id='rememberchb']")
+LOGIN_BUTTON = ("xpath", "//span[normalize-space()='Login']")
