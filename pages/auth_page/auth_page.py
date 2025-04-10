@@ -8,6 +8,7 @@ from selenium.webdriver.support import expected_conditions as EC
 class AuthPage(BasePage):
     PAGE_URL = Links.LOGIN_PAGE
 
+    @allure.step("Filling username and password fields")
     def filling_credentials_fields(self, login: str, password: str):
         with allure.step("Clear username and password fields"):
             self.wait.until(EC.visibility_of_element_located(LOCATOR.USERNAME_FIELD)).clear()
@@ -19,6 +20,7 @@ class AuthPage(BasePage):
             assert (self.find(*LOCATOR.USERNAME_FIELD).get_attribute("value") == login
                     and self.find(*LOCATOR.PASSWORD_FIELD).get_attribute("value") == password)
 
-    def click_login_button(self):
+    @allure.step("Click login button")
+    def click_login(self):
         with allure.step("Click login button"):
-            self.click_base_button(*LOCATOR.LOGIN_BUTTON)
+            self.click_to_element(*LOCATOR.LOGIN_BUTTON)

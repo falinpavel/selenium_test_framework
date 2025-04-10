@@ -30,8 +30,10 @@ class BasePage:
             attachment_type=AttachmentType.PNG
         )
 
+    @allure.step("Find element")
     def find(self, *locator: tuple):
         return self.driver.find_element(*locator)
 
-    def click_base_button(self, *locator: tuple):
+    @allure.step("Click element")
+    def click_to_element(self, *locator: tuple):
         self.find(*locator).click()
