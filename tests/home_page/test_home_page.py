@@ -3,16 +3,16 @@ import allure
 from base.base_test import BaseTest
 
 
-@allure.feature(f"Main page")
+@allure.feature(f"Home page")
 class TestHomePage(BaseTest):
     @pytest.mark.smoke
     @pytest.mark.ui
-    @allure.title("Check that home page")
+    @allure.title("Check home page header contains all languages")
     @allure.severity("major")
-    @allure.story("Home page")
-    @allure.description("Check that home page is opened, click on language dropdown and get all languages")
-    def test_home_page_is_opened(self):
+    @allure.story("Home page header")
+    @allure.description("Check home page header contains all languages in dropdown, and click on it")
+    def test_home_page_header(self):
         self.home_page.open_page()
         self.home_page.page_is_opened()
         self.home_page.click_language_dropdown()
-        self.home_page.get_all_languages()
+        self.home_page.get_names_of_all_languages_buttons()

@@ -12,8 +12,8 @@ class HomePage(BasePage):
     def click_language_dropdown(self):
         self.simple_click_to_element(*LOCATOR.LANGUAGE_DROPDOWN)
 
-    @allure.step("Click language")
-    def get_all_languages(self):
+    @allure.step("Click language and check names of all languages")
+    def get_names_of_all_languages_buttons(self):
         self.wait.until(EC.element_to_be_clickable(LOCATOR.LANGUAGE_DROPDOWN))
         get_all_languages = self.find_elements(LOCATOR.LANGUAGE_DROPDOWN, LOCATOR.LIST_OF_LANGUAGES)
         languages: set = set()
