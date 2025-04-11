@@ -43,6 +43,10 @@ class BasePage:
         with allure.step(f"Click element: {locator}"):
             self.find(*locator).click()
 
+    @allure.step("Check element is visible")
+    def check_element_is_visible(self, *locator: tuple):
+        return self.wait.until(EC.visibility_of_element_located(*locator)).is_displayed()
+
     @allure.step("Search field, clear and send keys new value")
     def clear_field_and_send_keys(self, locator: tuple[str, str], text: str):
         with allure.step("Clear field"):
@@ -58,3 +62,20 @@ class BasePage:
         parent_element = self.find(*locator)
         result = parent_element.find_elements(*to_get_all_locator)
         return result
+
+    @allure.step("Check that all expected elements are present")
+    def check_elements_are_present(self, parent_locator: tuple[str, str], child_locator: tuple, expected_texts: set):
+        parent_element = self.wait.until(EC.visibility_of_element_located(parent_locator))
+        actual_texts = set()
+        for element in parent_element.find_elements(*child_locator):
+            actual_texts.add(element.text)
+        assert actual_texts == expected_texts
+
+    @allure.step("Click on all visible elements")
+    def click_on_all_visible_elements(self, parent_locator: tuple, child_locator: tuple):
+        self.wait.until(EC.visibility_of_element_located(*parent_locator))
+        all_elements = self.find_elements(parent_locator, child_locator)
+        for element in all_elements:
+            if element.is_displayed():
+                with allure.step(f"Click on element: {element.text}"):
+                    self.simple_click_to_element(*element)

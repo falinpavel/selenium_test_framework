@@ -10,9 +10,8 @@ class TestAuth(BaseTest):
     @allure.title("Successful authorization with valid credentials")
     @allure.severity("blocker")
     @allure.story("Successful authorization")
-    @allure.description("""
-    Authorization with valid credentials, 
-    for this test used valid email and password""")
+    @allure.description("""Authorization with valid credentials, 
+    for this test used valid email and password from .env file""")
     def test_successful_authorization(self):
         self.auth_page.open_page()
         self.auth_page.page_is_opened()
