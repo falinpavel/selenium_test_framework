@@ -30,24 +30,31 @@ class BasePage:
             attachment_type=AttachmentType.PNG
         )
 
-    @allure.step("Find element")
-    def find(self, *locator: tuple[str, str]):
+    @allure.step("Find one element")
+    def find(self, *locator: tuple):
         return self.driver.find_element(*locator)
 
+    @allure.step("Find all elements")
+    def find_all(self, *locator: tuple):
+        return self.driver.find_elements(*locator)
+
     @allure.step("Click element")
-    def simple_click_to_element(self, *locator: tuple[str, str]):
-        self.find(*locator).click()
+    def simple_click_to_element(self, *locator: tuple):
+        with allure.step(f"Click element: {locator}"):
+            self.find(*locator).click()
 
     @allure.step("Search field, clear and send keys new value")
-    def clear_and_send_keys(self, locator: tuple[str, str], text: str):
+    def clear_field_and_send_keys(self, locator: tuple[str, str], text: str):
         with allure.step("Clear field"):
             field = self.wait.until(EC.element_to_be_clickable(locator))
             field.clear()
             assert field.get_attribute("value") == ""
-        with allure.step("Send keys"):
+        with allure.step(f"Send keys new value: {text}"):
             field.send_keys(text)
             assert field.get_attribute("value") == text
 
-    @allure.step("Get all attributes from element")
-    def get_all_attributes(self, locator: tuple[str, str]):
-        return self.find(*locator).get_attribute("class")
+    @allure.step("Get all attributes from element (find elements into element)")
+    def find_elements(self, locator: tuple, to_get_all_locator: tuple):
+        parent_element = self.find(*locator)
+        result = parent_element.find_elements(*to_get_all_locator)
+        return result

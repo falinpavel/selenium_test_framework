@@ -1,7 +1,7 @@
 import allure
 from base.base_page import BasePage
 from config.links import Links
-import pages.auth_page.auth_locators as LOCATOR
+import pages.auth_page.auth_page_locators as LOCATOR
 
 
 class AuthPage(BasePage):
@@ -10,8 +10,8 @@ class AuthPage(BasePage):
     @allure.step("Filling username and password fields")
     def filling_credentials_fields(self, login: str, password: str):
         with allure.step(f"Clear username and password fields, fill new login: {login}, password: {password}"):
-            self.clear_and_send_keys(LOCATOR.USERNAME_FIELD, login)
-            self.clear_and_send_keys(LOCATOR.PASSWORD_FIELD, password)
+            self.clear_field_and_send_keys(LOCATOR.USERNAME_FIELD, login)
+            self.clear_field_and_send_keys(LOCATOR.PASSWORD_FIELD, password)
 
     @allure.step("Click login button")
     def click_login(self):
