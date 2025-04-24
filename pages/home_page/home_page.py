@@ -16,9 +16,10 @@ class HomePage(BasePage):
 
     @allure.step("Click language dropdown and check names of all languages")
     def get_names_of_all_languages_buttons(self):
-        language_dropdown = self.wait.until(EC.element_to_be_clickable(
-            LOCATOR.LANGUAGE_DROPDOWN
-        ))
+        language_dropdown = self.wait.until(
+            EC.element_to_be_clickable(
+                LOCATOR.LANGUAGE_DROPDOWN
+            ))
         language_dropdown.click()
         expected_languages = {
             'Germany', 'French', 'Russian',
@@ -26,7 +27,7 @@ class HomePage(BasePage):
         }
         assert self.wait.until(
             EC.visibility_of_any_elements_located(LOCATOR.LIST_OF_LANGUAGES),
-          ) is True
+        )
         self.check_elements_are_present(
             LOCATOR.LANGUAGE_DROPDOWN,
             LOCATOR.LIST_OF_LANGUAGES,

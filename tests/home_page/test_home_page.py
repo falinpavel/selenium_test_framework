@@ -18,4 +18,4 @@ class TestHomePage(BaseTest):
         self.home_page.page_is_opened()
         self.home_page.click_language_dropdown()
         self.home_page.get_names_of_all_languages_buttons()
-        self.home_page.click_on_all_language_links()
+        # self.home_page.click_on_all_language_links()

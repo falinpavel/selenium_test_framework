@@ -3,7 +3,9 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
 
-@pytest.fixture(autouse=True, name="driver")
+@pytest.fixture(autouse=True,
+                scope="function",
+                name="driver")
 def driver(request):
     options = Options()
     options.add_argument("--window-size=1920,1080")
