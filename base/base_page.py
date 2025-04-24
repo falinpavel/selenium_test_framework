@@ -72,7 +72,7 @@ class BasePage:
         assert actual_texts | expected_texts
 
     @allure.step("Click on all visible elements")
-    def click_on_all_visible_elements(self, parent_locator, child_locator):
+    def click_on_all_visible_elements(self, parent_locator: tuple[str, str], child_locator: tuple[str, str]):
         self.wait.until(EC.visibility_of_element_located(parent_locator))
         all_elements = self.find_elements(parent_locator, child_locator)
         for element in all_elements:
